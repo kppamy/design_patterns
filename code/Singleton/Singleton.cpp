@@ -10,6 +10,7 @@
 using namespace std;
 
 Singleton * Singleton::instance = NULL;
+Singleton::mutex mu;
 Singleton::Singleton(){
 
 }
@@ -19,6 +20,7 @@ Singleton::~Singleton(){
 }
 
 Singleton* Singleton::getInstance(){
+lock_guard<mutex> lck(mu);
 	if (instance == NULL)
 	{
 		instance = new Singleton();
